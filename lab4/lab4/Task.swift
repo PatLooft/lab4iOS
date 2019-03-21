@@ -29,7 +29,7 @@ class Task{
     }
     
     convenience init(){
-        init();
+        self.init();
     }
     
     
