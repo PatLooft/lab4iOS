@@ -63,6 +63,10 @@ class Task{
     func getPriority() -> Priority{
         return self.priority;
     }
+    
+    func toString(t: Task){
+        print("TASK VALUES:\nTEXT: \(self.text)\nDATE: \(self.dueDate)\nPRIORITY: \(self.priority)\nCOMPLETED:  \(completed)");
+    }
  
 }//end of class Task
 
