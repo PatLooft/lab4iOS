@@ -38,6 +38,7 @@ class Task{
     //HELPER METHODS
     func equals(t: Task) -> Bool{
         //checking for text variable in tasks, safely unwrapping first
+        var nilEqualNil = false;
         if case t.text = t.text{
             if case self.text = self.text{
                 if(self.text != t.text){
@@ -45,26 +46,30 @@ class Task{
                 }
             }
             else{
-                return false;
+                nilEqualNil = true;
             }
         }
         else{
-            return false;
+            if(!nilEqualNil){
+                return false;
+            }
         }
-        
+        nilEqualNil = false;
         //checking for variable dueDate, after safely unwrapping
         if case t.dueDate = t.dueDate{
             if case self.dueDate = self.dueDate{
-                if(self.dueDate == t.dueDate){
+                if(self.dueDate != t.dueDate){
                     return false;
                 }
             }
             else{//nil
-                return false;
+                nilEqualNil = true;
             }
         }
         else{//nil
-            return false;
+            if(!nilEqualNil){
+                return false;
+            }
         }
             
         if( self.priority != t.priority && self.completed != t.completed){

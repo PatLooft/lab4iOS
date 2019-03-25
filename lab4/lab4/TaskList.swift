@@ -84,9 +84,10 @@ class TaskList{
          should be removed and the method should return NO.*/
         var iter: Int;
         iter = 0;
-        for aTask in tlist{
+        for aTask in self.tlist{
             if(aTask.equals(t: task)){
-                tlist.remove(at: iter);
+                self.tlist.remove(at: iter);
+                self.count -= 1;
                 return true;
             }
             iter+=1;
@@ -101,10 +102,13 @@ class TaskList{
         var iter: Int;
         iter = 0;
         for aTask in self.tlist{
-            if(aTask.isComplete()){
+            /*if(aTask.isComplete()){
                 self.tlist.remove(at: iter);
+                iter -= 1;
                 self.count -= 1;
-                return;
+            }*/
+            if(aTask.isComplete() && self.remove(task: aTask) && iter > 0){
+                iter -= 1;
             }
             iter+=1;
         }
