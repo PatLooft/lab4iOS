@@ -47,13 +47,14 @@ class TaskList{
         //makes use of functions extending NSDate at end of class
         
         //this guy
-        /*var newList = [Task]();
+        var newList = [Task]();
         for t in self.tlist{
             if(startDate < t.getDate() as Date && endDate > t.getDate() as Date){
                 newList.append(t);
             }
-        }*/
-        return tlist.filter({ (task: Task) -> Bool in return ( (startDate < task.getDate() as Date) && endDate > task.getDate() as Date)});
+        }
+        return newList;
+        //return tlist.filter({ (task: Task) -> Bool in return ( (startDate < task.getDate() as Date) && endDate > task.getDate() as Date)});
     }
     
     public func tasks(with p: Priority) -> [Task] {

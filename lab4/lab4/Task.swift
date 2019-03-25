@@ -10,7 +10,7 @@ import Foundation
 
 class Task{
     private var text: String?;
-    private var dueDate: NSDate?;
+    private var dueDate: Date?;
     private var priority: Priority;
     private var completed: Bool;
     
@@ -21,7 +21,7 @@ class Task{
         self.completed = false;
     }
     
-    public init(text: String, dueDate: NSDate?, priority: Priority, completed: Bool) {
+    public init(text: String, dueDate: Date?, priority: Priority, completed: Bool) {
         self.text = text;
         self.dueDate = dueDate;
         self.priority = priority;
@@ -107,11 +107,11 @@ class Task{
         return self.completed;
     }
     
-    func getDate() -> NSDate{
+    func getDate() -> Date{
         if let unwrapped  = self.dueDate{
             return unwrapped;
         }//returns the optional unwrapped or current day
-        return NSDate();
+        return Date();
     }
     
     func getPriority() -> Priority{
@@ -140,7 +140,7 @@ class Task{
  
 }//end of class Task
 
-func hasSigned(signedDate: NSDate?) -> Bool {
+func hasSigned(signedDate: Date?) -> Bool {
     if let date = signedDate{
         return true;
     }

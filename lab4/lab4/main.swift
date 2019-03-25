@@ -10,12 +10,14 @@ import Foundation
 
 func taskGen(size: Int) -> TaskList{
     var tlist: TaskList;
-    tlist = TaskList()
+    
+    tlist = TaskList();
+    
     
     
     var count: Int = 0;
     var txt = "test";
-    var dat = NSDate();
+    var dat = Date();
     var com = false;
     var str: String;
     str = "";
@@ -43,10 +45,15 @@ func taskGen(size: Int) -> TaskList{
 
 var tlist: TaskList;
 tlist = TaskList()
-var dat: NSDate;
-//dat = 
-var one = Task(text: "one", dueDate: NSDate(), priority: Priority.low, completed: true);
-var two = Task(text: "one", dueDate: NSDate(), priority: Priority.low, completed: true);
+var tlist2: TaskList;
+tlist2 = TaskList();
+
+var one = Task(text: "one", dueDate: Date(), priority: Priority.low, completed: true);
+var two = Task(text: "one", dueDate: Date(), priority: Priority.low, completed: true);
+
+tlist2.add(task: one);
+
+
 print("Trying to add two of the same object");
 var uno = tlist.add(task: one);
 var dos = tlist.add(task: two);
@@ -97,3 +104,30 @@ tlist.toString();
 print("REMOVE ALL")
 tlist.removeAllTasks();
 print("\(tlist.size())");
+
+
+
+
+//DATES
+let formatter = DateFormatter()
+formatter.dateFormat = "yyyy/MM/dd HH:mm"
+let startTime = formatter.date(from: "2014/10/08 22:31");
+let endTime = formatter.date(from: "2020/10/08 22:31");
+let beforeTime = formatter.date(from: "2012/10/08 22:31");
+let afterTime = formatter.date(from: "2022/10/08 22:31");
+
+var three: Task;
+var four: Task;
+print("=====================================================\nNEW LIST")
+three = Task(text: "before", dueDate: beforeTime, priority: Priority.low, completed: false);
+four = Task(text: "after", dueDate: afterTime, priority: Priority.low, completed: false);
+tlist2.add(task: three);
+tlist2.add(task: four);
+
+
+tlist2.toString();
+print("TASKS BETWEEN \(startTime!) and \(endTime!)")
+var k = tlist2.tasksBetween(startDate: startTime!, endDate: endTime!);
+for l in k{
+    l.toString();
+}
