@@ -38,15 +38,23 @@ class TaskList{
          the current day. For example, a Task with a dueDate of 5:16:00pm on 3/11/2019 is not past due until the date rolls over to
          3/12/2019.*/
         //makes use of functions at end of class
-        return tlist.filter({ (task: Task) -> Bool in return task.getDate() < NSDate()});
+        return tlist.filter({ (task: Task) -> Bool in return Date() > task.getDate() as Date});
     }
     
-    /*public func tasksBetween(startDate: Date, endDate: Date) -> [Task] {
+    public func tasksBetween(startDate: Date, endDate: Date) -> [Task] {
         /*Returns an NSArray consisting of classes which are between the specified start and stop dates/times (inclusive on both sides).
          These between times should be treated exactly as specified — no rounding to beginning or end of day.*/
         //makes use of functions extending NSDate at end of class
-        return tlist.filter({ (task: Task) -> Bool in return (startDate < task.getDate() && task.getDate < endDate)});
-    }*/
+        
+        //this guy
+        /*var newList = [Task]();
+        for t in self.tlist{
+            if(startDate < t.getDate() as Date && endDate > t.getDate() as Date){
+                newList.append(t);
+            }
+        }*/
+        return tlist.filter({ (task: Task) -> Bool in return ( (startDate < task.getDate() as Date) && endDate > task.getDate() as Date)});
+    }
     
     public func tasks(with p: Priority) -> [Task] {
         //Returns an NSArray containing all Tasks with a priority matching the specified Priority.
@@ -121,9 +129,14 @@ class TaskList{
         }
     }
     
+    public func size() -> Int{
+        return count;
+    }
+    
 }
 //\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//
 //HELPER METHODS
+/*
     public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
         return lhs === rhs || lhs.compare(rhs as Date) == .orderedSame
     }
@@ -132,5 +145,5 @@ class TaskList{
         return lhs.compare(rhs as Date) == .orderedAscending
     }
     
-    extension NSDate: Comparable { }
+    extension NSDate: Comparable { }*/
 

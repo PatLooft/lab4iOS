@@ -43,6 +43,8 @@ func taskGen(size: Int) -> TaskList{
 
 var tlist: TaskList;
 tlist = TaskList()
+var dat: NSDate;
+//dat = 
 var one = Task(text: "one", dueDate: NSDate(), priority: Priority.low, completed: true);
 var two = Task(text: "one", dueDate: NSDate(), priority: Priority.low, completed: true);
 print("Trying to add two of the same object");
@@ -92,4 +94,6 @@ print("REMOVE COMPLETED");
 tlist.removeCompletedTasks();
 tlist.toString();
 
-
+print("REMOVE ALL")
+tlist.removeAllTasks();
+print("\(tlist.size())");
