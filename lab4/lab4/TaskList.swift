@@ -11,7 +11,7 @@ import Foundation
 class TaskList{
     
     private var count: Int;
-    var tlist = [Task]();
+    private var tlist = [Task]();
     
     init(){
         self.count = 0;
@@ -60,32 +60,62 @@ class TaskList{
         /*This method should add the specified Task to the list. If a Task already exists in the list where all properties match the
          specified task, then the method should return NO and not insert anything. If no matching Task is found, the item should be
          inserted and the method should return YES.*/
-        if self.tlist.contains(where: { $0.equals(t: task) }){
-            print("Item already in the list, will not add.");
-            return false;
+        for t in self.tlist{
+            if (t.equals(t: task)){
+                print("Item already in the list, will not add.");
+                return false;
+            }
         }
-        else{
-            print("Item not in list, adding.");
-            self.tlist.append(task);
-            return true;
-        }
+        count+=1;
+        print("Item not in list, adding.");
+        self.tlist.append(task);
+        return true;
     }
     
     public func removeAllTasks() {
         //This method should remove all Tasks from the list.
+        count = 0;
         self.tlist.removeAll();
     }
     
-    /*public func remove(task: Task) -> Bool {
+    public func remove(task: Task) -> Bool {
         /*This method should remove the specified Task from the list. If a Task exists in the list where all properties match the
          specified task, then the method should return YES and remove the item from the list. If no matching Task is found, then nothing
          should be removed and the method should return NO.*/
-        
-    }*/
+        var iter: Int;
+        iter = 0;
+        for aTask in tlist{
+            if(aTask.equals(t: task)){
+                tlist.remove(at: iter);
+                return true;
+            }
+            iter+=1;
+        }
+        return false;
+    }
     
     public func removeCompletedTasks() {
+        if(self.tlist.isEmpty){
+            return;
+        }
+        var iter: Int;
+        iter = 0;
+        for aTask in self.tlist{
+            if(aTask.isComplete()){
+                self.tlist.remove(at: iter);
+                self.count -= 1;
+                return;
+            }
+            iter+=1;
+        }
     }
     //This method should remove all Tasks that are marked complete from the list
+    
+    public func toString(){
+        for t in self.tlist{
+            t.toString();
+        }
+    }
     
 }
 //\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//

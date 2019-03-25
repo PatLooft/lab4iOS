@@ -36,18 +36,67 @@ class Task{
     
     //\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//
     //HELPER METHODS
-    
     func equals(t: Task) -> Bool{
-        if(self.text == t.text &&
-            (self.dueDate?.isEqual(to: t.dueDate))! &&
-           self.priority == t.priority &&
-            self.completed == t.completed){
-            return true;
+        //checking for text variable in tasks, safely unwrapping first
+        if case t.text = t.text{
+            if case self.text = self.text{
+                if(self.text != t.text){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
         }
         else{
             return false;
         }
+        
+        //checking for variable dueDate, after safely unwrapping
+        if case t.dueDate = t.dueDate{
+            if case self.dueDate = self.dueDate{
+                if(self.dueDate == t.dueDate){
+                    return false;
+                }
+            }
+            else{//nil
+                return false;
+            }
+        }
+        else{//nil
+            return false;
+        }
+            
+        if( self.priority != t.priority && self.completed != t.completed){
+            return false;
+        }
+            
+        return true;
     }
+    /*
+    func equals(t: Task) -> Bool{
+        //checking if both text fields are not equal (nil == nil), and one is not nil;
+        if((!((self.text?.isEmpty)! && (t.text?.isEmpty)!))){
+            return false;
+        }
+        //checking that dates are not equal (only case of nil == nil), but if one is nil return false
+        else if( !(hasSigned(signedDate: self.dueDate) && hasSigned(signedDate: t.dueDate)) && (hasSigned(signedDate: self.dueDate) || hasSigned(signedDate: t.dueDate)) ){
+            return false;
+        }
+        //checking text is not equal
+        else if( !((self.text?.isEmpty)! && (t.text?.isEmpty)!) && self.text != t.text ){
+            return false;
+        }
+        //checking if dueDates are not equal
+        else if(!((self.dueDate?.isEqual(to: t.dueDate))!)){
+            return false;
+        }
+        //checking priorities are not equal, and completed is not equal
+        else if( !(self.priority == t.priority && self.completed == t.completed))  {
+            return false;
+        }
+        return true;
+    }*/
     
     func isComplete() -> Bool{
         return self.completed;
@@ -64,11 +113,36 @@ class Task{
         return self.priority;
     }
     
-    func toString(t: Task){
-        print("TASK VALUES:\nTEXT: \(self.text)\nDATE: \(self.dueDate)\nPRIORITY: \(self.priority)\nCOMPLETED:  \(completed)");
+    func toString(){
+        //safely unwrapping text variable of task
+        if let txt = self.text{
+            print("TASK VALUES:\nTEXT: \(txt)");
+        }
+        else{
+            print("TASK VALUES:\nTEXT: NIL");
+        }
+        if let dat = self.dueDate{
+            print("DATE: \(dat)");
+        }
+        else{
+            print("DATE: NIL");
+        }
+        
+        print("PRIORITY: \(self.priority)\nCOMPLETED:  \(self.completed)\n");
     }
+    
+    
  
 }//end of class Task
+
+func hasSigned(signedDate: NSDate?) -> Bool {
+    if let date = signedDate{
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 
 //\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//\\\//\\//\\//\\//\\//\\//\\//\\//
